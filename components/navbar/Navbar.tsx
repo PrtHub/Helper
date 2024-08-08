@@ -22,7 +22,7 @@ const Navbar = () => {
           <UserButton
             appearance={{
               elements: {
-                avatarBox: "h-10 w-10",
+                avatarBox: "sm:h-10 sm:w-10",
               },
               variables: {
                 colorPrimary: "#ff7000",
