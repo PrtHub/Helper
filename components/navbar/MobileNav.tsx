@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedOut, useAuth } from "@clerk/nextjs";
 
 import {
   Sheet,
@@ -15,13 +15,23 @@ import { sidebarLinks } from "@/lib/constant";
 import { usePathname } from "next/navigation";
 
 const NavContent = () => {
+  const { userId } = useAuth()
   const pathname = usePathname();
+  
   return (
     <section className="flex h-full flex-col gap-6 pt-10">
       {sidebarLinks.map((link, index) => {
         const isActive =
           link.route === pathname ||
           (pathname.includes(link.route) && link.route.length > 1);
+
+          if(link.route === '/profile'){
+            if(userId){
+             link.route = `${link.route}/${userId}`
+            } else {
+              return null
+            }
+          }
 
         return (
           <SheetClose key={index} asChild>
