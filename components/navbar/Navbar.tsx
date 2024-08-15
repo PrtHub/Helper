@@ -23,6 +23,12 @@ const Navbar = () => {
             appearance={{
               elements: {
                 avatarBox: "sm:h-10 sm:w-10",
+                userButtonPopoverActionButton: {
+                  color: "#fff",
+                  "&:hover": {
+                    color: "#999999",
+                  },
+                },
               },
               variables: {
                 colorPrimary: "#ff7000",

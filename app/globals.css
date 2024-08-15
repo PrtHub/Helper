@@ -251,6 +251,23 @@ code {
   background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%) !important;
 }
 
+.cl-internal-16vtwdp, .cl-internal-16rjnjd {
+  display: none;
+}
+
+.cl-socialButtonsBlockButtonText {
+  color: white
+}
+
+.cl-socialButtonsProviderIcon__github, .cl-formFieldInputShowPasswordButton {
+  filter: invert(1);
+}
+
+.cl-socialButtonsBlockButton {
+  background-color: #151821;
+}
+
+
 .hash-span {
   margin-top: -140px;
   padding-bottom: 140px;
