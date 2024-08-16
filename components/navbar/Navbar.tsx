@@ -8,7 +8,7 @@ import MobileNav from "@/components/navbar/MobileNav";
 
 const Navbar = () => {
   return (
-    <nav className="w-full flex-between p-6 gap-5 shadow-light-300 dark:shadow-none sm:px-12 bg-light-900 dark:bg-dark-200">
+    <nav className="w-full fixed top-0 flex-between p-6 gap-5 shadow-light-300 dark:shadow-none sm:px-12 bg-light-900 dark:bg-dark-200 z-50">
       <Link href={"/"} className="">
         <h2 className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900">
           Dev<span className="text-primary-500">Hub</span>

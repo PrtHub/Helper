@@ -6,7 +6,7 @@ import { popularTags, topQuestions } from "@/lib/constant";
 
 const RightSidebar = () => {
   return (
-    <section className="bg-light-900 dark:bg-dark-200 sticky top-0 left-0 h-screen w-[350px] flex flex-col overflow-y-scroll border-l p-6 pt-16 shadow-light-300 dark:shadow-none max-xl:hidden light-border custom-scrollbar">
+    <section className="bg-light-900 dark:bg-dark-200 sticky top-0 left-0 h-screen w-[350px] flex flex-col overflow-y-scroll border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden light-border custom-scrollbar">
       <section className="w-full">
         <h3 className="h3-bold text-dark-200 dark:text-light-900 ">
           Top Questions

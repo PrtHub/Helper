@@ -70,3 +70,10 @@ export const popularTags = [
   { _id: 4, name: 'vue', totalQuestions: 2 },
   { _id: 5, name: 'redux', totalQuestions: 10 },
 ]
+
+export const HomePageFilters = [
+  { name: "Newest", value: "newest" },
+  { name: "Recommended", value: "recommended" },
+  { name: "Frequent", value: "frequent" },
+  { name: "Unanswered", value: "unanswered" },
+]
