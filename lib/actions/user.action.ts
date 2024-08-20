@@ -11,7 +11,7 @@ export async function getUserById(params: any) {
 
     const user = await User.findOne({ clerkId: userId });
 
-    if (!user) throw new Error("User not found");
+    // if (!user) throw new Error("User not found");
 
     return user;
   } catch (error) {

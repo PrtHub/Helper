@@ -8,3 +8,10 @@ export interface createQuestionParams {
     author: Schema.Types.ObjectId | IUser
     path: string
 }
+
+export interface GetQuestionsParams {
+    page?: number;
+    pageSize?: number;
+    searchQuery?: string;
+    filter?: string;
+  }
