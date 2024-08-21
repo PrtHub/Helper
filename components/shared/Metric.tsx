@@ -2,7 +2,7 @@ import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 interface MetricProps {
-  icon: LucideIcon;
+  icon: LucideIcon | string;
   value: string | number;
   title: string;
   href?: string;

@@ -55,7 +55,7 @@ const QuestionCard = ({
 
       <section className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          icon={User}
+          icon={author.picture}
           value={author.name}
           title={` - asked ${getTimestamp(createdAt)}`}
           href={`/profile/${author._id}`}
