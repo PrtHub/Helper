@@ -29,7 +29,7 @@ export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
 
-    const tags = await Tag.find({});
+    const tags = await Tag.find({}).populate("questions");
 
     return { tags };
   } catch (error) {

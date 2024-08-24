@@ -11,8 +11,8 @@ export async function getQuestions(params: GetQuestionsParams) {
     connectToDatabase();
 
     const questions = await Question.find({})
-      .populate({ path: "author", model: "User" })
-      .populate({ path: "tags", model: "Tag" })
+      .populate("author", "username picture name")
+      .populate("tags", "name")
       .sort({ createdAt: -1 });
 
     return { questions };

@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface MetricProps {
@@ -18,9 +19,16 @@ const Metric = ({
   textStyles,
   isAuthor,
 }: MetricProps) => {
+
+  const isLucideIcon = typeof Icon !== "string" && Icon?.$$typeof === Symbol.for("react.forward_ref");
+
   const metricContent = (
     <>
-      <Icon className={` size-4 ${href && "rounded-full"}`} />
+      {isLucideIcon ? (
+        <Icon className={`size-4 ${href && "rounded-full"}`} />
+      ) : (
+        <Image src={Icon as string} alt={title} width={16} height={16} className={`object-contain ${href ? 'rounded-full' : ''}`} />
+      )}
       <p className={`${textStyles} flex items-center gap-1`}>
         {value}
         <span
@@ -36,7 +44,7 @@ const Metric = ({
 
   if (href) {
     return (
-      <Link href={href} className="flex-center  gap-1">
+      <Link href={href} className="flex-center gap-1">
         {metricContent}
       </Link>
     );

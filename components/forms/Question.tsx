@@ -22,6 +22,7 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { XIcon } from "lucide-react";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -41,7 +42,22 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof QuestionSchema>) => {
-    console.log(values);
+    setIsSubmitting(true);
+    try {
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+        path: pathname,
+      });
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputKeyDown = (
