@@ -17,8 +17,17 @@ import {
 } from "../ui/form";
 import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "@/context/ThemeProvider";
+import { usePathname } from "next/navigation";
+import { createAnswer } from "@/lib/actions/answer.action";
 
-const Answer = () => {
+interface AnswerProps {
+  question: string;
+  questionId: string;
+  authorId: string;
+}
+
+const Answer = ({ question, authorId, questionId }: AnswerProps) => {
+  const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { theme } = useTheme();
   const editorRef = useRef(null);
@@ -28,6 +37,31 @@ const Answer = () => {
       answer: "",
     },
   });
+
+  const handleCreateAnswer = async (values: z.infer<typeof AnswerSchema>) => {
+    setIsSubmitting(true);
+
+    try {
+      await createAnswer({
+        content: values.answer,
+        author: JSON.parse(authorId),
+        question: JSON.parse(questionId),
+        path: pathname,
+      });
+
+      form.reset();
+
+      if (editorRef.current) {
+        const editor = editorRef.current as any;
+
+        editor.setContent("");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="mt-10 flex flex-col gap-y-5">
@@ -45,16 +79,12 @@ const Answer = () => {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => {})}>
+        <form onSubmit={form.handleSubmit(handleCreateAnswer)}>
           <FormField
             name="answer"
             control={form.control}
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">
-                  Detailed explanation of your problem{" "}
-                  <span className="text-primary-500">*</span>
-                </FormLabel>
                 <FormControl className="mt-3.5">
                   <Editor
                     apiKey={
@@ -104,7 +134,7 @@ const Answer = () => {
           />
           <div className="flex justify-end mt-2">
             <Button
-              type="button"
+              type="submit"
               className="primary-gradient w-fit text-white"
               disabled={isSubmitting}
             >
