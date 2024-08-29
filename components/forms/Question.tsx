@@ -19,14 +19,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Badge } from "../ui/badge";
-import Image from "next/image";
 import { Button } from "../ui/button";
 import { XIcon } from "lucide-react";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useTheme } from "@/context/ThemeProvider";
 
 const type: any = "create";
 
 const Question = ({ mongoUserId }: { mongoUserId: string }) => {
+  const { theme } = useTheme()
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -166,6 +167,8 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
                     content_style: "body { font-family:Inter; font-size:16px }",
+                    skin: theme === "dark" ? "oxide-dark" : "oxide",
+                    content_css: theme === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>

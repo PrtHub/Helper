@@ -2,17 +2,22 @@
 
 import Question from "@/models/question.model";
 import { connectToDatabase } from "../mongoose";
-import { createQuestionParams, GetQuestionsParams } from "./shared.types";
+import {
+  createQuestionParams,
+  GetQuestionByIdParams,
+  GetQuestionsParams,
+} from "./shared.types";
 import Tag from "@/models/tag.model";
 import { revalidatePath } from "next/cache";
+import User from "@/models/user.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
     const questions = await Question.find({})
-      .populate("author", "username picture name")
-      .populate("tags", "name")
+      .populate({path: "author", model: User, select: "username picture name"})
+      .populate({path: "tags", model: Tag, select: "name"})
       .sort({ createdAt: -1 });
 
     return { questions };
@@ -60,6 +65,23 @@ export async function createQuestion(params: createQuestionParams) {
     });
 
     revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getQuestionById(params: GetQuestionByIdParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    const question = await Question.findById(questionId)
+    .populate({ path: 'tags', model: Tag, select: '_id name'})
+    .populate({ path: 'author', model: User, select: '_id clerkId name picture'})
+
+    return question;
   } catch (error) {
     console.log(error);
     throw error;
