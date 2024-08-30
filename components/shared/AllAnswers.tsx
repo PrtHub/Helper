@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getTimestamp } from "@/lib/utils";
 import ParseHTML from "./ParseHTML";
+import Votes from "./Votes";
 
 interface AllAnswersProps {
   questionId: string;
@@ -31,7 +32,7 @@ const AllAnswers = async ({
         <Filter filters={AnswerFilters} />
       </div>
 
-      <div >
+      <div>
         {result.answers.length > 0 ? (
           result.answers.map((answer) => (
             <article key={answer._id} className="light-border border-b py-10">
@@ -58,7 +59,17 @@ const AllAnswers = async ({
                       </p>
                     </div>
                   </Link>
-                  <div className="flex justify-end">VOTING</div>
+                  <div className="flex justify-end">
+                    <Votes
+                      type="Answer"
+                      userId={JSON.stringify(userId)}
+                      itemId={JSON.stringify(answer?._id)}
+                      upvotes={answer.upvotes.length}
+                      downvotes={answer.downvotes.length}
+                      hasupVoted={answer.upvotes.includes(userId)}
+                      hasdownVoted={answer.downvotes.includes(userId)}
+                    />
+                  </div>
                 </section>
               </div>
               <ParseHTML data={answer.content} />

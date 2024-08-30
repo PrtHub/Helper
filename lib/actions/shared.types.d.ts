@@ -70,3 +70,25 @@ export interface GetAnswersParams {
   page?: number;
   pageSize?: number;
 }
+
+export interface QuestionVoteParams {
+  questionId: string;
+  userId: string;
+  hasupVoted: boolean;
+  hasdownVoted: boolean;
+  path: string;
+}
+
+export interface AnswerVoteParams {
+  answerId: string;
+  userId: string;
+  hasupVoted: boolean;
+  hasdownVoted: boolean;
+  path: string;
+}
+
+export interface ToggleSaveQuestionParams {
+  userId: string;
+  questionId: string;
+  path: string;
+}
