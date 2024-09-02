@@ -2,6 +2,8 @@ import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import Link from "next/link";
 import Metric from "../shared/Metric";
 import { ThumbsUp } from "lucide-react";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../shared/EditDeleteAction";
 
 interface AnswerProps {
     clerkId?: string | null;
@@ -18,9 +20,11 @@ interface AnswerProps {
     };
     upvotes: number;
     createdAt: Date;
+    answer?: string
   }
 
 const AnswerCard = ({_id, clerkId, question, author, upvotes, createdAt} : AnswerProps) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId
   return (
     <Link
       href={`/question/${question._id}/#${_id}`}
@@ -35,13 +39,18 @@ const AnswerCard = ({_id, clerkId, question, author, upvotes, createdAt} : Answe
             {question.title}
           </h3>
         </div>
+        <SignedIn>
+          {showActionButtons && (
+            <EditDeleteAction type="Answer" itemId={JSON.stringify(_id)}/>
+          )}
+        </SignedIn>
       </div>
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
          icon={author?.picture}
           value={author.name}
-          title={` • asked ${getTimestamp(createdAt)}`}
+          title={` • answerd ${getTimestamp(createdAt)}`}
           href={`/profile/${author.clerkId}`}
           textStyles="body-medium text-dark400_light700"
           isAuthor

@@ -21,30 +21,46 @@ import {
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { XIcon } from "lucide-react";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useTheme } from "@/context/ThemeProvider";
 
-const type: any = "create";
+interface QuestionProps {
+  type?: string;
+  mongoUserId: string;
+  questionDetails?: string;
+}
 
-const Question = ({ mongoUserId }: { mongoUserId: string }) => {
-  const { theme } = useTheme()
+const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
+  const { theme } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
+  const parsedQuestionDetails = JSON.parse(questionDetails || "");
+  const groupedTags = parsedQuestionDetails?.tags.map((tag: any) => tag.name);
+
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
-      title: "",
-      explanation: "",
-      tags: [],
+      title: parsedQuestionDetails.title || "",
+      explanation: parsedQuestionDetails.content || "",
+      tags: groupedTags || [],
     },
   });
 
   const onSubmit = async (values: z.infer<typeof QuestionSchema>) => {
     setIsSubmitting(true);
     try {
+      if (type === "Edit") {
+        await editQuestion({
+          questionId: parsedQuestionDetails._id,
+          content: values.explanation,
+          title: values.title,
+          path: pathname,
+        });
+        router.push(`/question/${parsedQuestionDetails._id}`);
+      }
       await createQuestion({
         title: values.title,
         content: values.explanation,
@@ -141,7 +157,7 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
                   }}
                   onBlur={field.onBlur}
                   onEditorChange={(content) => field.onChange(content)}
-                  initialValue=""
+                  initialValue={parsedQuestionDetails.content || ""}
                   init={{
                     height: 350,
                     menubar: false,
@@ -191,6 +207,7 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
               <FormControl className="mt-3.5">
                 <>
                   <Input
+                    disabled={type === "Edit"}
                     className="no-focus paragraph-regular bg-light-900 dark:bg-dark-300 light-border-2 text-dark-300 dark:text-light-700 min-h-[56px] border"
                     placeholder="Add tags..."
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
@@ -201,10 +218,16 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
                         <Badge
                           key={tag}
                           className="subtle-medium bg-light-800 dark:bg-dark-300 text-light-400 dark:text-light-500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
-                          onClick={() => handleTagRemove(tag, field)}
+                          onClick={() =>
+                            type !== "Edit"
+                              ? handleTagRemove(tag, field)
+                              : () => {}
+                          }
                         >
                           {tag}
-                          <XIcon className="invert-colors size-3 cursor-pointer" />
+                          {type !== "Edit" && (
+                            <XIcon className="invert-colors size-3 cursor-pointer" />
+                          )}
                         </Badge>
                       ))}
                     </div>
@@ -225,9 +248,9 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
           disabled={isSubmitting}
         >
           {isSubmitting ? (
-            <>{type === "edit" ? "Editing..." : "Posting..."}</>
+            <>{type === "Edit" ? "Editing..." : "Posting..."}</>
           ) : (
-            <>{type === "edit" ? "Edit Question" : "Ask a Question"}</>
+            <>{type === "Edit" ? "Edit Question" : "Ask a Question"}</>
           )}
         </Button>
       </form>

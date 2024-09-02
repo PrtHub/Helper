@@ -7,8 +7,10 @@ import HomeFilters from "@/components/home/HomeFilters";
 import QuestionCard from "@/components/cards/QuestionCard";
 import NoResult from "@/components/shared/NoResult";
 import { getQuestions } from "@/lib/actions/question.action";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function Home() {
+  const { userId: clerkId } = auth();
   const data = await getQuestions({});
 
   return (
@@ -43,6 +45,7 @@ export default async function Home() {
             <QuestionCard
               key={question._id}
               _id={question._id}
+              clerkId={clerkId}
               title={question.title}
               tags={question.tags}
               author={question.author}

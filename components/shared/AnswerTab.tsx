@@ -1,6 +1,4 @@
-import { getUserAnswers, getUserQuestions } from "@/lib/actions/user.action";
-import QuestionCard from "../cards/QuestionCard";
-import NoResult from "./NoResult";
+import { getUserAnswers } from "@/lib/actions/user.action";
 import AnswerCard from "../cards/AnswerCard";
 
 export interface SearchParamsProps {
@@ -17,6 +15,7 @@ const AnswerTab = async ({ userId, clerkId, searchParams }: Props) => {
     userId,
     page: 1,
   });
+
   return (
     <>
       {result.answers.map((item) => (
@@ -25,6 +24,7 @@ const AnswerTab = async ({ userId, clerkId, searchParams }: Props) => {
           clerkId={clerkId}
           _id={item._id}
           question={item.question}
+          // answer={item.content}
           author={item.author}
           upvotes={item.upvotes.length}
           createdAt={item.createdAt}

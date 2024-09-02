@@ -3,6 +3,8 @@ import Link from "next/link";
 import RenderTag from "@/components/shared/RenderTag";
 import Metric from "@/components/shared/Metric";
 import { Eye, MessageCircle, ThumbsUp, User } from "lucide-react";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../shared/EditDeleteAction";
 
 interface QuestionProps {
   _id: string;
@@ -15,17 +17,18 @@ interface QuestionProps {
     _id: string;
     name: string;
     picture: string;
+    clerkId: string;
   };
   upvotes: string[];
   views: number;
   answers: Array<object>;
   createdAt: Date;
-  clerkId?: string;
+  clerkId?: string | null;
 }
 
 const QuestionCard = ({
-  clerkId,
   _id,
+  clerkId,
   title,
   answers,
   author,
@@ -34,6 +37,8 @@ const QuestionCard = ({
   views,
   tags,
 }: QuestionProps) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId
+
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <section className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -47,6 +52,11 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+        <SignedIn>
+          {showActionButtons && (
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)}/>
+          )}
+        </SignedIn>
       </section>
 
       <section className="mt-3.5 flex flex-wrap gap-2">

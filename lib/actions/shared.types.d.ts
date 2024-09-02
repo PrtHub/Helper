@@ -125,3 +125,20 @@ export interface GetUserStatsParams {
   filter?: string;
   searchQuery?: string;
 }
+
+export interface DeleteQuestionParams {
+  questionId: string;
+  path: string;
+}
+
+export interface EditQuestionParams {
+  questionId: string;
+  title: string;
+  content: string;
+  path: string;
+}
+
+export interface DeleteAnswerParams {
+  answerId: string;
+  path: string;
+}

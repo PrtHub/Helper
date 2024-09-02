@@ -4,6 +4,8 @@ import Question from "@/models/question.model";
 import { connectToDatabase } from "../mongoose";
 import {
   createQuestionParams,
+  DeleteQuestionParams,
+  EditQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
@@ -11,6 +13,8 @@ import {
 import Tag from "@/models/tag.model";
 import { revalidatePath } from "next/cache";
 import User from "@/models/user.model";
+import Answer from "@/models/answer.model";
+import Interaction from "@/models/interaction.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -20,7 +24,7 @@ export async function getQuestions(params: GetQuestionsParams) {
       .populate({
         path: "author",
         model: User,
-        select: "username picture name",
+        select: "username picture name clerkId",
       })
       .populate({ path: "tags", model: Tag, select: "name" })
       .sort({ createdAt: -1 });
@@ -153,6 +157,54 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     });
 
     if (!question) throw new Error("Question not found");
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function deleteQuestion(params: DeleteQuestionParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId, path } = params;
+
+    await Question.findOne({ _id: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
+
+    await Tag.updateMany(
+      { questions: questionId },
+      {
+        $pull: { questions: questionId },
+      }
+    );
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function editQuestion(params: EditQuestionParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId, title, content, path } = params;
+
+    const question = await Question.findById(questionId).populate("tags");
+
+    if (!question) {
+      throw new Error("Question not found");
+    }
+
+    question.title = title;
+    question.content = content;
+
+    await question.save();
 
     revalidatePath(path);
   } catch (error) {
