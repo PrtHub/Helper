@@ -17,10 +17,7 @@ const ProfilEditPage = async () => {
       </h1>
 
       <div className="mt-9">
-        <Profile
-        // clerkId={userId}
-        // user={JSON.stringify(mongoUser)}
-        />
+        <Profile clerkId={userId} user={JSON.stringify(mongoUser)} />
       </div>
     </>
   );
