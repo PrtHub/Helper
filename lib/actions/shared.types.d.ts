@@ -113,3 +113,15 @@ export interface GetQuestionsByTagIdParams {
   filter?: string;
   searchQuery?: string;
 }
+
+export interface GetUserByIdParams {
+  userId: string;
+}
+
+export interface GetUserStatsParams {
+  userId: string;
+  page?: number;
+  pageSize?: number;
+  filter?: string;
+  searchQuery?: string;
+}
