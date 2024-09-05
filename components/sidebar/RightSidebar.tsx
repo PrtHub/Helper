@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
-// import { popularTags, topQuestions } from "@/lib/constant";
 import { getTopQuestions } from "@/lib/actions/question.action";
 import { getTopPopularTags } from "@/lib/actions/tags.action";
 
