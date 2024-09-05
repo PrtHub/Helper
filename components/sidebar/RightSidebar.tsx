@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
-import { popularTags, topQuestions } from "@/lib/constant";
+// import { popularTags, topQuestions } from "@/lib/constant";
+import { getTopQuestions } from "@/lib/actions/question.action";
+import { getTopPopularTags } from "@/lib/actions/tags.action";
 
-const RightSidebar = () => {
+const RightSidebar = async () => {
+
+  const topQuestions = await getTopQuestions()
+  const popularTags = await getTopPopularTags()
+
   return (
     <section className="bg-light-900 dark:bg-dark-200 sticky top-0 left-0 h-screen w-[350px] flex flex-col overflow-y-scroll border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden light-border custom-scrollbar">
       <section className="w-full">
@@ -15,7 +21,7 @@ const RightSidebar = () => {
           {topQuestions.map((question) => (
             <Link
               key={question._id}
-              href={`/questions/${question._id}`}
+              href={`/question/${question._id}`}
               className="w-full flex cursor-pointer items-start justify-between gap-7"
             >
               <p className="body-medium text-dark-500 dark:text-light-700">
@@ -47,7 +53,7 @@ const RightSidebar = () => {
                 {tag.name}
               </Badge>
               <p className="small-medium text-dark-500 dark:text-light-700">
-                {tag.totalQuestions}
+                {tag.numberOfQuestions}
               </p>
             </Link>
           ))}
