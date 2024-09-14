@@ -26,7 +26,7 @@ const page = async ({
       </h1>
       <section className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
-          route="/"
+          route={`/tags/${params.id}`}
           iconPosition="left"
           placeholder="Search tag questions"
           otherClasses="flex-1"

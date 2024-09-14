@@ -9,9 +9,15 @@ import NoResult from "@/components/shared/NoResult";
 import { getQuestions } from "@/lib/actions/question.action";
 import { auth } from "@clerk/nextjs/server";
 
-export default async function Home() {
+interface SearchParamsProps {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export default async function Home({searchParams}: SearchParamsProps) {
   const { userId: clerkId } = auth();
-  const data = await getQuestions({});
+  const data = await getQuestions({
+    searchQuery: searchParams?.q,
+  });
 
   return (
     <>

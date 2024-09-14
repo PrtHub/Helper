@@ -7,13 +7,18 @@ import { QuestionFilters } from "@/lib/constant";
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
 
-const page = async () => {
+interface SearchParamsProps{
+  searchParams: { [key: string]: string | undefined };
+}
+
+const page = async ({searchParams}: SearchParamsProps) => {
   const { userId } = auth();
 
   if (!userId) return null;
 
   const result = await getSavedQuestions({
     clerkId: userId,
+    searchQuery: searchParams?.q
   });
 
   return (
