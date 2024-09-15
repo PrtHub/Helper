@@ -8,16 +8,18 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import NoResult from "@/components/shared/NoResult";
 import { getQuestions } from "@/lib/actions/question.action";
 import { auth } from "@clerk/nextjs/server";
+import Pagination from "@/components/shared/Pagination";
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };
 }
 
-export default async function Home({searchParams}: SearchParamsProps) {
+export default async function Home({ searchParams }: SearchParamsProps) {
   const { userId: clerkId } = auth();
   const data = await getQuestions({
     searchQuery: searchParams?.q,
     filter: searchParams?.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
   });
 
   return (
@@ -71,6 +73,12 @@ export default async function Home({searchParams}: SearchParamsProps) {
           />
         )}
       </section>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={data.isNext}
+        />
+      </div>
     </>
   );
 }

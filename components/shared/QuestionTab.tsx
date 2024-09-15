@@ -1,6 +1,7 @@
 import { getUserQuestions } from "@/lib/actions/user.action";
 import QuestionCard from "../cards/QuestionCard";
 import NoResult from "./NoResult";
+import Pagination from "./Pagination";
 
 export interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };
@@ -14,7 +15,7 @@ interface Props extends SearchParamsProps {
 const QuestionTab = async ({ userId, clerkId, searchParams }: Props) => {
   const result = await getUserQuestions({
     userId,
-    page: 1,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -41,6 +42,13 @@ const QuestionTab = async ({ userId, clerkId, searchParams }: Props) => {
           linkTitle="Create a post"
         />
       )}
+
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNextQuestions}
+        />
+      </div>
     </>
   );
 };
