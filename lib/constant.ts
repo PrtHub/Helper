@@ -105,3 +105,10 @@ export const QuestionFilters = [
   { name: "Most Viewed", value: "most_viewed" },
   { name: "Most Answered", value: "most_answered" },
 ];
+
+export const GlobalSearchFilters = [
+  { name: "Question", value: "question" },
+  { name: "Answer", value: "answer" },
+  { name: "User", value: "user" },
+  { name: "Tag", value: "tag" },
+];
