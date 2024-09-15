@@ -12,6 +12,7 @@ interface SearchParamsProps {
 const TagsPage = async ({ searchParams }: SearchParamsProps) => {
   const results = await getAllTags({
     searchQuery: searchParams?.q,
+    filter: searchParams?.filter,
   });
 
   return (

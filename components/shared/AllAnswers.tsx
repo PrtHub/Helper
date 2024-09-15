@@ -12,15 +12,21 @@ interface AllAnswersProps {
   userId: string;
   totalAnswers: number;
   page?: number;
-  filter?: number;
+  filter?: string;
 }
 
 const AllAnswers = async ({
   questionId,
   userId,
   totalAnswers,
+  page,
+  filter,
 }: AllAnswersProps) => {
-  const result = await getAnswers({ questionId: questionId });
+  const result = await getAnswers({
+    questionId: questionId,
+    page: page ? +page : 1,
+    sortBy: filter,
+  });
 
   return (
     <section className="mt-10">

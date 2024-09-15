@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const QuestionPage = async ({ params }: { params: { id: string } }) => {
+const QuestionPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
 
   let mongoUser;
@@ -21,8 +21,6 @@ const QuestionPage = async ({ params }: { params: { id: string } }) => {
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
-
-  console.log(mongoUser);
 
   const result = await getQuestionById({ questionId: params.id });
 
@@ -101,6 +99,8 @@ const QuestionPage = async ({ params }: { params: { id: string } }) => {
         questionId={result._id}
         userId={mongoUser?._id}
         totalAnswers={result.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
 
       <Answer
