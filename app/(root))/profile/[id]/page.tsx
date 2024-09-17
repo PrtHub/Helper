@@ -85,6 +85,8 @@ const ProfilePage = async ({
       <Stats
         totalQuestions={userInfo.totalQuestions}
         totalAnswers={userInfo.totalAnswers}
+        reputation={userInfo.reputation}
+        badges={userInfo.BadgeCounts}
       />
 
       <section className="mt-10 flex gap-10">

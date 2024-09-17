@@ -1,15 +1,18 @@
 import { formatAndDivideNumber } from "@/lib/utils";
+import { BadgeCounts } from "@/types";
 import Image from "next/image";
 
 interface StatsProps {
   totalQuestions: number;
   totalAnswers: number;
+  reputation: number;
+  badges: BadgeCounts;
 }
 
-const Stats = ({ totalQuestions, totalAnswers }: StatsProps) => {
+const Stats = ({ totalQuestions, totalAnswers, reputation, badges }: StatsProps) => {
   return (
     <div className="mt-10">
-      <h4 className="h3-semibold text-dark-200 dark:text-light-900">Stats</h4>
+      <h4 className="h3-semibold text-dark-200 dark:text-light-900">Stats - {reputation}</h4>
       <section className="mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-4">
         <div className="light-border bg-light-900 dark:bg-dark-300 flex flex-wrap items-center justify-start gap-4 rounded-md border p-6 shadow-light-300 dark:shadow-dark-200">
           <div>
@@ -30,9 +33,9 @@ const Stats = ({ totalQuestions, totalAnswers }: StatsProps) => {
           </div>
         </div>
 
-        <StatsCard imgUrl="/gold-medal.svg" value={0} title="Gold Badges" />
-        <StatsCard imgUrl="/silver-medal.svg" value={0} title="Silver Badges" />
-        <StatsCard imgUrl="/bronze-medal.svg" value={0} title="Bronze Badges" />
+        <StatsCard imgUrl="/gold-medal.svg" value={badges?.GOLD} title="Gold Badges" />
+        <StatsCard imgUrl="/silver-medal.svg" value={badges?.SILVER} title="Silver Badges" />
+        <StatsCard imgUrl="/bronze-medal.svg" value={badges?.BRONZE} title="Bronze Badges" />
       </section>
     </div>
   );
