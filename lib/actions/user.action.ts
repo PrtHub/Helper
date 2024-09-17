@@ -17,6 +17,7 @@ import Question from "@/models/question.model";
 import Tag from "@/models/tag.model";
 import { FilterQuery } from "mongoose";
 import Answer from "@/models/answer.model";
+import { create } from "domain";
 
 export async function getUserById(params: any) {
   try {
@@ -273,13 +274,13 @@ export async function getUserQuestions(params: GetUserStatsParams) {
     const totalQuestions = await Question.countDocuments({ author: userId });
 
     const userQuestions = await Question.find({ author: userId })
-      .sort({ views: -1, upvotes: -1 })
+      .sort({ createdAt: -1, views: -1, upvotes: -1 })
       .skip(skipAmount)
       .limit(pageSize)
       .populate("tags", "_id name")
       .populate("author", "_id clerkId name picture");
 
-      const isNextQuestions = totalQuestions > skipAmount + userQuestions.length
+    const isNextQuestions = totalQuestions > skipAmount + userQuestions.length;
 
     return { totalQuestions, questions: userQuestions, isNextQuestions };
   } catch (error) {
@@ -305,7 +306,7 @@ export async function getUserAnswers(params: GetUserStatsParams) {
       .populate("question", "_id title")
       .populate("author", "_id clerkId name picture");
 
-      const isNextAnswer = totalAnswers > skipAmount + userAnswers.length
+    const isNextAnswer = totalAnswers > skipAmount + userAnswers.length;
 
     return { totalAnswers, answers: userAnswers, isNextAnswer };
   } catch (error) {
