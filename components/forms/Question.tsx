@@ -23,6 +23,7 @@ import { Button } from "../ui/button";
 import { XIcon } from "lucide-react";
 import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useTheme } from "@/context/ThemeProvider";
+import { toast } from "@/hooks/use-toast";
 
 interface QuestionProps {
   type?: string;
@@ -59,6 +60,10 @@ const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
           title: values.title,
           path: pathname,
         });
+        toast({
+          title: "Question Edited",
+          description: "Your question has been edited",
+        })
         router.push(`/question/${parsedQuestionDetails._id}`);
       }
       await createQuestion({
@@ -68,6 +73,11 @@ const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
         author: JSON.parse(mongoUserId),
         path: pathname,
       });
+
+      toast({
+        title: "Question Created",
+        description: "Your question has been created"
+      })
 
       router.push("/");
     } catch (error) {

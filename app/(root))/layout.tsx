@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar/Navbar";
 import LeftSidebar from "@/components/sidebar/LeftSidebar";
 import RightSidebar from "@/components/sidebar/RightSidebar";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
           <div className="w-full mx-auto max-w-5xl">{children}</div>
         </section>
         <RightSidebar />
+        <Toaster/>
       </div>
     </main>
   );

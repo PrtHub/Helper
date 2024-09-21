@@ -18,6 +18,7 @@ import {
 } from "../ui/form";
 import { AnswerSchema } from "@/lib/validation";
 import { createAnswer } from "@/lib/actions/answer.action";
+import { toast } from '@/hooks/use-toast';
 
 interface AnswerProps {
   question: string;
@@ -102,6 +103,12 @@ const Answer = ({ question, authorId, questionId }: AnswerProps) => {
         const editor = editorRef.current as any;
         editor.setContent("");
       }
+
+      toast({
+        title: "Answer Created",
+        description: "Your answer has been created"
+      });
+
     } catch (error) {
       console.error("Error creating answer:", error);
       setError(error instanceof Error ? error.message : "An unknown error occurred");

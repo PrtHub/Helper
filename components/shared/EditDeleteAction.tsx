@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "@/hooks/use-toast";
 import { deleteAnswer } from "@/lib/actions/answer.action";
 import { deleteQuestion } from "@/lib/actions/question.action";
 import { Pencil, Trash2 } from "lucide-react";
@@ -24,6 +25,10 @@ const EditDeleteAction = ({ itemId, type }: ActionProps) => {
         questionId: JSON.parse(itemId),
         path: pathname,
       });
+      return toast({
+        title: "Question Deleted",
+        description: "Your question has been deleted",
+      })
     }
 
     if (type === "Answer") {
@@ -31,6 +36,11 @@ const EditDeleteAction = ({ itemId, type }: ActionProps) => {
         answerId: JSON.parse(itemId),
         path: pathname,
       });
+
+      return toast({
+        title: "Answer Deleted",
+        description: "Your answer has been deleted",
+      })
     }
   };
 
