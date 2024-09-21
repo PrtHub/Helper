@@ -9,8 +9,17 @@ import { getJoinedDate } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Calendar, Link2, LocateIcon } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const userInfo = await getUserInfo({ userId: params.id });
+  
+  return {
+    title: `${userInfo.user.name} | Dev Hub`,
+  };
+}
 
 const ProfilePage = async ({
   params,

@@ -4,7 +4,12 @@ import Filter from "@/components/shared/Filter";
 import Pagination from "@/components/shared/Pagination";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { UserFilters } from "@/lib/constant";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: 'Community | DevHub',
+}
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };

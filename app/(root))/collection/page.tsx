@@ -6,7 +6,12 @@ import Pagination from "@/components/shared/Pagination";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { QuestionFilters } from "@/lib/constant";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: 'Collection | DevHub',
+}
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };

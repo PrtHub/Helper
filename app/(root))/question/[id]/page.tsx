@@ -9,9 +9,18 @@ import { getUserById } from "@/lib/actions/user.action";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import { Clock, Eye, MessageCircle } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const result = await getQuestionById({ questionId: params.id });
+  
+  return {
+    title: `${result.title} | Dev Hub`,
+  };
+}
 
 const QuestionPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();

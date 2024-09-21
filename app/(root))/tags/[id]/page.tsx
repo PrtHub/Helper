@@ -5,7 +5,16 @@ import NoResult from "@/components/shared/NoResult";
 import Pagination from "@/components/shared/Pagination";
 import { getQuestionsByTagId } from "@/lib/actions/tags.action";
 import { QuestionFilters } from "@/lib/constant";
+import { Metadata } from "next";
 import React from "react";
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const result = await getQuestionsByTagId({ tagId: params.id });
+  
+  return {
+    title: `${result.tagTitle} | Dev Hub`,
+  };
+}
 
 const page = async ({
   params,

@@ -9,6 +9,11 @@ import NoResult from "@/components/shared/NoResult";
 import { getQuestions } from "@/lib/actions/question.action";
 import { auth } from "@clerk/nextjs/server";
 import Pagination from "@/components/shared/Pagination";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Home | Dev Hub',
+}
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };

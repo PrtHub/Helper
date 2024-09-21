@@ -34,11 +34,6 @@ export const sidebarLinks = [
     label: "Collections",
   },
   {
-    imgURL: BriefcaseBusiness,
-    route: "/jobs",
-    label: "Find Jobs",
-  },
-  {
     imgURL: Tag,
     route: "/tags",
     label: "Tags",

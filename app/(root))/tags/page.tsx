@@ -5,6 +5,11 @@ import NoResult from "@/components/shared/NoResult";
 import Pagination from "@/components/shared/Pagination";
 import { getAllTags } from "@/lib/actions/tags.action";
 import LocalSearchbar from "@/components/search/LocalSearchbar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Tags | Dev Hub',
+}
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };
