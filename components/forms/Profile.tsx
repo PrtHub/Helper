@@ -79,7 +79,7 @@ const Profile = ({ user, clerkId }: ProfileProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">
                 Name <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -98,7 +98,7 @@ const Profile = ({ user, clerkId }: ProfileProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">
                 Username <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -117,7 +117,7 @@ const Profile = ({ user, clerkId }: ProfileProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>Portfolio Link</FormLabel>
+              <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">Portfolio Link</FormLabel>
               <FormControl>
                 <Input
                   type="url"
@@ -135,7 +135,7 @@ const Profile = ({ user, clerkId }: ProfileProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>Location</FormLabel>
+              <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">Location</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Where are you from?"
@@ -152,7 +152,7 @@ const Profile = ({ user, clerkId }: ProfileProps) => {
           control={form.control}
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark-400 dark:text-light-800">
                 Bio <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>

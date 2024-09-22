@@ -24,7 +24,7 @@ const Theme = () => {
             <Moon fill="#FF7000" className="active-theme cursor-pointer" />
           )}
         </MenubarTrigger>
-        <MenubarContent className="absolute right-[-3rem] mt-3 min-w-[120px] rounded border py-2 dark:border-dark-400 dark:bg-dark-300">
+        <MenubarContent className="absolute right-[-3rem] mt-3 min-w-[120px] rounded border py-2 dark:border-dark-400 dark:bg-dark-300 bg-light-900">
           {themes.map((item, index) => (
             <MenubarItem
               key={index}

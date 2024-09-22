@@ -37,7 +37,7 @@ const QuestionCard = ({
   views,
   tags,
 }: QuestionProps) => {
-  const showActionButtons = clerkId && clerkId === author.clerkId
+  const showActionButtons = clerkId && clerkId === author.clerkId;
 
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
@@ -54,7 +54,7 @@ const QuestionCard = ({
         </div>
         <SignedIn>
           {showActionButtons && (
-            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)}/>
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
           )}
         </SignedIn>
       </section>
@@ -75,25 +75,27 @@ const QuestionCard = ({
           textStyles="body-medium text-dark-400 dark:text-light-700"
         />
 
-        <Metric
-          icon={ThumbsUp}
-          value={formatAndDivideNumber(upvotes.length)}
-          title=" Votes"
-          textStyles="small-medium text-dark-400 dark:text-light-800"
-        />
+        <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
+          <Metric
+            icon={ThumbsUp}
+            value={formatAndDivideNumber(upvotes.length)}
+            title=" Votes"
+            textStyles="small-medium text-dark-400 dark:text-light-800"
+          />
 
-        <Metric
-          icon={MessageCircle}
-          value={formatAndDivideNumber(answers.length)}
-          title=" Answers"
-          textStyles="small-medium text-dark-400 dark:text-light-800"
-        />
-        <Metric
-          icon={Eye}
-          value={formatAndDivideNumber(views)}
-          title=" Views"
-          textStyles="small-medium text-dark-400 dark:text-light-800"
-        />
+          <Metric
+            icon={MessageCircle}
+            value={formatAndDivideNumber(answers.length)}
+            title=" Answers"
+            textStyles="small-medium text-dark-400 dark:text-light-800"
+          />
+          <Metric
+            icon={Eye}
+            value={formatAndDivideNumber(views)}
+            title=" Views"
+            textStyles="small-medium text-dark-400 dark:text-light-800"
+          />
+        </div>
       </section>
     </div>
   );

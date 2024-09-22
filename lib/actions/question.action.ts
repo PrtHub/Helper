@@ -9,6 +9,7 @@ import {
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
+  RecommendedParams,
 } from "./shared.types";
 import Tag from "@/models/tag.model";
 import { revalidatePath } from "next/cache";
@@ -117,8 +118,8 @@ export async function createQuestion(params: createQuestionParams) {
     });
 
     await User.findByIdAndUpdate(author, {
-      $inc: {reputation: 5}
-    })
+      $inc: { reputation: 5 },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -174,12 +175,12 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
     if (!question) throw new Error("Question not found");
 
     await User.findByIdAndUpdate(userId, {
-      $inc: {reputation: hasupVoted ? -1 : 1}
-    })
+      $inc: { reputation: hasupVoted ? -1 : 1 },
+    });
 
     await User.findByIdAndUpdate(question.author, {
-      $inc: {reputation: hasupVoted ? -10 : 10}
-    })
+      $inc: { reputation: hasupVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -214,12 +215,12 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     if (!question) throw new Error("Question not found");
 
     await User.findByIdAndUpdate(userId, {
-      $inc: {reputation: hasdownVoted ? -2 : 2}
-    })
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
+    });
 
     await User.findByIdAndUpdate(question.author, {
-      $inc: {reputation: hasdownVoted ? -10 : 10}
-    })
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -285,6 +286,73 @@ export async function getTopQuestions() {
       .limit(5);
 
     return questions;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getRecomemdedQuestions(params: RecommendedParams) {
+  try {
+    await connectToDatabase();
+
+    const { userId, page = 1, pageSize = 10, searchQuery } = params;
+
+    const user = await User.findOne({ clerkId: userId });
+
+    if (!user) {
+      throw new Error("User not found!");
+    }
+
+    const skipAmount = (page - 1) * pageSize;
+
+    const userInteractions = await Interaction.find({ user: user._id })
+      .populate("tags")
+      .exec();
+
+    const userTags = userInteractions.reduce((tags, interaction) => {
+      if (interaction.tags) {
+        tags = tags.concat(interaction.tags);
+      }
+      return tags;
+    }, []);
+
+    const distinctTags = Array.from(
+      new Set(userTags.map((tag: any) => tag._id))
+    );
+
+    const query: FilterQuery<typeof Question> = {
+      $and: [{ tags: { $in: distinctTags } }, { author: { $ne: user._id } }],
+    };
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: new RegExp(searchQuery, "i") } },
+        { content: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+
+    const totalQuestions = await Question.countDocuments(query);
+
+    const questions = await Question.find(query)
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({
+        path: "author",
+        model: User,
+      })
+      .skip(skipAmount)
+      .limit(pageSize);
+
+    const isNext = totalQuestions > skipAmount + questions.length;
+
+    return {
+      questions,
+      totalQuestions,
+      isNext,
+    };
   } catch (error) {
     console.log(error);
     throw error;

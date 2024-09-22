@@ -6,26 +6,47 @@ import { HomePageFilters } from "@/lib/constant";
 import HomeFilters from "@/components/home/HomeFilters";
 import QuestionCard from "@/components/cards/QuestionCard";
 import NoResult from "@/components/shared/NoResult";
-import { getQuestions } from "@/lib/actions/question.action";
+import {
+  getQuestions,
+  getRecomemdedQuestions,
+} from "@/lib/actions/question.action";
 import { auth } from "@clerk/nextjs/server";
 import Pagination from "@/components/shared/Pagination";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Home | Dev Hub',
-}
+  title: "Home | Dev Hub",
+};
 
 interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };
 }
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { userId: clerkId } = auth();
-  const data = await getQuestions({
-    searchQuery: searchParams?.q,
-    filter: searchParams?.filter,
-    page: searchParams?.page ? +searchParams.page : 1,
-  });
+  const { userId } = auth();
+
+  let results;
+
+  if (searchParams.filter === "recommended") {
+    if (userId) {
+      results = await getRecomemdedQuestions({
+        userId,
+        searchQuery: searchParams?.q,
+        page: searchParams?.page ? +searchParams.page : 1,
+      });
+    } else {
+      results = {
+        questions: [],
+        isNext: false,
+      };
+    }
+  } else {
+    results = await getQuestions({
+      searchQuery: searchParams?.q,
+      filter: searchParams?.filter,
+      page: searchParams?.page ? +searchParams.page : 1,
+    });
+  }
 
   return (
     <>
@@ -54,12 +75,12 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       </section>
       <HomeFilters />
       <section className="mt-10 flex w-full flex-col gap-6">
-        {data.questions.length > 0 ? (
-          data.questions.map((question) => (
+        {results.questions.length > 0 ? (
+          results.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
-              clerkId={clerkId}
+              clerkId={userId}
               title={question.title}
               tags={question.tags}
               author={question.author}
@@ -81,7 +102,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       <div className="mt-10">
         <Pagination
           pageNumber={searchParams?.page ? +searchParams.page : 1}
-          isNext={data.isNext}
+          isNext={results.isNext}
         />
       </div>
     </>
