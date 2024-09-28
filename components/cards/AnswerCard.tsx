@@ -30,7 +30,7 @@ const AnswerCard = ({_id, clerkId, question, author, upvotes, createdAt} : Answe
       href={`/question/${question._id}/#${_id}`}
       className="card-wrapper rounded-[10px] px-11 py-9"
     >
-      <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
+      <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row font-inter">
         <div>
           <span className="subtle-regular text-dark-400 dark:text-light-700 line-clamp-1 flex sm:hidden">
             {getTimestamp(createdAt)}

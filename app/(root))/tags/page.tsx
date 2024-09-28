@@ -24,7 +24,7 @@ const TagsPage = async ({ searchParams }: SearchParamsProps) => {
 
   return (
     <>
-      <h1 className="h1-bold text-dark-100 dark:text-light-900">All Tags</h1>
+      <h1 className="h1-bold text-dark-100 dark:text-light-900 font-inter">All Tags</h1>
 
       <section className="mt-11 flex justify-between sm:items-center max-sm:flex-col gap-5">
         <LocalSearchbar
@@ -45,11 +45,11 @@ const TagsPage = async ({ searchParams }: SearchParamsProps) => {
             <Link
               href={`/tags/${tag._id}`}
               key={tag._id}
-              className="shadow-light100_darknone"
+              className="shadow-light-300 dark:shadow-none"
             >
-              <article className="bg-light-900 dark:bg-dark-200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
+              <article className="bg-light-900 dark:bg-dark-200 light-border flex w-full flex-col rounded-2xl border-2 dark:border px-8 py-10 sm:w-[260px] font-inter">
                 <div className="bg-light-800 dark:bg-dark-400 w-fit rounded-sm px-5 py-1.5">
-                  <p className="paragraph-semibold text-dark-300 dark:text-light-900">
+                  <p className="paragraph-semibold text-dark-200 dark:text-light-900">
                     {tag.name}
                   </p>
                 </div>

@@ -47,8 +47,8 @@ const QuestionCard = ({
             {createdAt && getTimestamp(createdAt)}
           </span>
           <Link href={`/question/${_id}`}>
-            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
-              {title}
+            <h3 className="sm:h3-semibold base-semibold font-inter font-[500] text-dark-100 dark:text-light-900 line-clamp-1 flex-1">
+              {title.charAt(0).toUpperCase() + title.slice(1)}
             </h3>
           </Link>
         </div>
@@ -65,7 +65,7 @@ const QuestionCard = ({
         ))}
       </section>
 
-      <section className="flex-between mt-6 w-full flex-wrap gap-3">
+      <section className="flex-between mt-6 w-full flex-wrap gap-3 font-inter">
         <Metric
           icon={author?.picture}
           value={author.name}

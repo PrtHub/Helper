@@ -25,7 +25,7 @@ const Metric = ({
   const metricContent = (
     <>
       {isLucideIcon ? (
-        <Icon className={`size-4 ${href && "rounded-full"}`} />
+        <Icon className={`size-4 text-light-400 ${href && "rounded-full "}`} />
       ) : (
         <Image src={Icon as string} alt={title} width={16} height={16} className={`object-contain ${href ? 'rounded-full' : ''}`} />
       )}

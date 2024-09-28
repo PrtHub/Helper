@@ -10,7 +10,7 @@ interface ProfileLinkProps {
 const ProfileLink = ({ icon: Icon, title, href }: ProfileLinkProps) => {
   return (
     <section className="flex-center gap-1">
-      <Icon className="size-4" />
+      <Icon className="size-4 text-light-400" />
 
       {href ? (
         <Link

@@ -32,7 +32,7 @@ const GlobalFilter = () => {
   };
 
   return (
-    <section className="flex items-center gap-5 px-5">
+    <section className="flex items-center gap-5 px-5 font-inter">
       <p className="text-dark-400 dark:text-light-900 body-medium">Type: </p>
       <div className="flex gap-3">
         {GlobalSearchFilters.map((item) => (
@@ -43,7 +43,7 @@ const GlobalFilter = () => {
               ${
                 active === item.value
                   ? "bg-primary-500 text-light-900 hover:text-light-850"
-                  : "bg-light-700 text-dark-400  hover:text-primary-500 dark:bg-dark-500 dark:text-light-700"
+                  : "bg-light-700 text-dark-400 hover:text-primary-500 dark:bg-dark-500 dark:text-light-700"
               }
             `}
             onClick={() => handleTypeClick(item.value)}

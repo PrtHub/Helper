@@ -12,7 +12,7 @@ const RightSidebar = async () => {
   const popularTags = await getTopPopularTags()
 
   return (
-    <section className="bg-light-900 dark:bg-dark-200 sticky top-0 left-0 h-screen w-[350px] flex flex-col overflow-y-scroll border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden light-border custom-scrollbar">
+    <section className="bg-light-900 dark:bg-dark-200 sticky top-0 left-0 h-screen w-[350px] flex flex-col overflow-y-scroll border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden light-border custom-scrollbar font-inter">
       <section className="w-full">
         <h3 className="h3-bold text-dark-200 dark:text-light-900 ">
           Top Questions
@@ -25,7 +25,7 @@ const RightSidebar = async () => {
               className="w-full flex cursor-pointer items-start justify-between gap-7"
             >
               <p className="body-medium text-dark-500 dark:text-light-700">
-                {question.title}
+                {question.title.charAt(0).toUpperCase() + question.title.slice(1)}
               </p>
               <Image
                 src="/chevron-right.svg"
@@ -49,7 +49,7 @@ const RightSidebar = async () => {
               key={tag._id}
               className="flex justify-between gap-2"
             >
-              <Badge className="subtle-medium bg-light-800 dark:bg-dark-300 text-light-400 dark:text-light-500 rounded-md border-none px-4 py-2 uppercase">
+              <Badge className="subtle-medium bg-light-800 dark:bg-dark-300 text-light-400 dark:text-light-500 shadow-md rounded-md border-none px-4 py-2 uppercase">
                 {tag.name}
               </Badge>
               <p className="small-medium text-dark-500 dark:text-light-700">

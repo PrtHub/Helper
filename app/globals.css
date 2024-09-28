@@ -24,7 +24,7 @@ body {
   }
 
   .h2-semibold {
-    @apply text-[24px] font-semibold leading-[31.2px];
+    @apply text-[24px] font-semibold font-inter leading-[31.2px];
   }
 
   .h3-bold {
@@ -56,7 +56,7 @@ body {
   }
 
   .paragraph-semibold {
-    @apply text-[16px] font-semibold leading-[20.8px];
+    @apply text-[16px] font-[600] leading-[20.8px];
   }
 
   .body-regular {
@@ -96,7 +96,7 @@ body {
   }
 
   .invert-colors {
-    @apply invert dark:invert-0;
+    @apply text-dark-200 dark:text-white  font-normal;
   }
 
   .primary-gradient {

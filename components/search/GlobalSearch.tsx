@@ -65,7 +65,7 @@ const GlobalSearch = () => {
 
   return (
     <section
-      className="w-full relative max-w-[500px] max-lg:hidden"
+      className="w-full relative max-w-[500px] max-lg:hidden font-inter"
       ref={searchContainRef}
     >
       <div className="relative bg-light-800 dark:dark-gradient flex items-center gap-1 grow px-4 rounded-xl min-h-12">
@@ -79,7 +79,7 @@ const GlobalSearch = () => {
             if (e.target.value === "" && isOpen) setIsOpen(false);
           }}
           placeholder="Search for anything..."
-          className="paragraph-regular text-light-400 no-focus placeholder bg-transparent border-none shadow-none outline-none"
+          className="paragraph-regular text-dark-400 dark:text-light-700 no-focus placeholder bg-transparent border-none shadow-none outline-none"
         />
       </div>
       {isOpen && <GlobalResult />}

@@ -43,7 +43,7 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
         {result.users.length > 0 ? (
           result.users.map((user) => <UserCard key={user._id} user={user} />)
         ) : (
-          <div className="paragraph-regular text-dark-200 dark:text-light-800 mx-auto max-w-4xl text-center">
+          <div className="paragraph-regular text-dark-200 dark:text-light-800 mx-auto max-w-4xl text-center font-inter">
             <p>No users yet</p>
             <Link href="/sign-up" className="mt-2 font-bold text-accent-blue">
               Join to be the first!

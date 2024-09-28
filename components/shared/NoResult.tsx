@@ -11,7 +11,7 @@ interface NoResultProps {
 
 const NoResult = ({ title, description, link, linkTitle }: NoResultProps) => {
   return (
-    <div className="mt-10 flex w-full flex-col items-center justify-center">
+    <div className="mt-10 flex w-full flex-col items-center justify-center font-inter">
       <Image
         src="/light-illustration.png"
         alt="No result illustration"
@@ -28,7 +28,7 @@ const NoResult = ({ title, description, link, linkTitle }: NoResultProps) => {
         className="hidden object-contain dark:flex"
       />
       <h2 className="h2-bold text-dark200_light900 mt-8">{title}</h2>
-      <p className="body-regular text-dark500_light700 my-3.5 max-w-md text-center">
+      <p className="body-regular text-dark-500 dark:text-light-700 my-3.5 max-w-md text-center">
         {description}
       </p>
 

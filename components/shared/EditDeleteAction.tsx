@@ -47,9 +47,9 @@ const EditDeleteAction = ({ itemId, type }: ActionProps) => {
   return (
     <section className="flex items-center justify-end gap-3 max-sm:w-full">
       {type === "Question" && (
-        <Pencil className="cursor-pointer size-4" onClick={handleEdit} />
+        <Pencil className="cursor-pointer size-4 text-light-400" onClick={handleEdit} />
       )}
-      <Trash2 className="cursor-pointer size-4" onClick={handleDelete} />
+      <Trash2 className="cursor-pointer size-4 text-light-400" onClick={handleDelete} />
     </section>
   );
 };

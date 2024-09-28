@@ -68,7 +68,7 @@ const GlobalResult = () => {
         </p>
 
         {isLoading ? (
-          <div className="flex-center flex-col px-5">
+          <div className="flex-center flex-col px-5 font-inter">
             <Loader2 className="my-2 h-10 w-10 animate-spin text-primary-500" />
             <p className="text-dark200_light800 body-regular">
               Browsing the entire database
@@ -96,7 +96,7 @@ const GlobalResult = () => {
               ))
             ) : (
               <div className="flex-center flex-col px-5">
-                <p className="text-dark-200 dark:text-light-800 text-dark200_light800 body-regular px-5 py-2.5">
+                <p className="text-dark-200 dark:text-light-800 body-regular px-5 py-2.5">
                   Oops, no results found
                 </p>
               </div>

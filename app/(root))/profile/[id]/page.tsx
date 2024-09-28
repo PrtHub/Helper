@@ -8,7 +8,7 @@ import { getUserInfo } from "@/lib/actions/user.action";
 import { getJoinedDate } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { Calendar, Link2, LocateIcon } from "lucide-react";
+import { Calendar, Link2, LocateIcon, MapPin } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,7 +44,7 @@ const ProfilePage = async ({
             className="rounded-full object-cover"
           />
 
-          <div className="mt-3">
+          <div className="mt-3 font-inter">
             <h2 className="h2-bold text-dark-100 dark:text-light-900">
               {userInfo.user.name}
             </h2>
@@ -61,7 +61,7 @@ const ProfilePage = async ({
                 />
               )}
               {userInfo.user.location && (
-                <ProfileLink icon={LocateIcon} title={userInfo.user.location} />
+                <ProfileLink icon={MapPin} title={userInfo.user.location} />
               )}
 
               <ProfileLink
@@ -82,8 +82,8 @@ const ProfilePage = async ({
           <SignedIn>
             {clerkId === userInfo.user.clerkId && (
               <Link href="/profile/edit">
-                <Button className="paragraph-medium btn-secondary text-dark-300 dark:text-light-900 min-h-[46px] min-w-[175px] px-4 py-3">
-                  Edit Profile
+                <Button className="paragraph-medium btn-secondary text-dark-200 dark:text-light-900 min-h-[46px] min-w-[175px] px-4 py-3 shadow-md">
+                  <p className="text-sm">Edit Profile</p>
                 </Button>
               </Link>
             )}

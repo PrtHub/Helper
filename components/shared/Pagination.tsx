@@ -30,7 +30,7 @@ const Pagination = ({ pageNumber, isNext }: Props) => {
   if (!isNext && pageNumber === 1) return null;
 
   return (
-    <section className="flex w-full items-center justify-center gap-2">
+    <section className="flex w-full items-center justify-center gap-2 font-inter">
       <Button
         disabled={pageNumber === 1}
         onClick={() => handleNavigation("prev")}

@@ -31,7 +31,7 @@ const page = async ({ searchParams }: SearchParamsProps) => {
 
   return (
     <>
-      <h1 className="h1-bold text-dark-100 dark:text-light-900">
+      <h1 className="h1-bold text-dark-100 dark:text-light-900 font-inter">
         Saved Questions
       </h1>
       <section className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">

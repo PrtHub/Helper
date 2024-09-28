@@ -17,9 +17,11 @@ interface UserCardProps {
 const UserCard = async ({ user }: UserCardProps) => {
   const interactedTags = await getTopInteractedTags({ userId: user._id });
 
+  console.log('interactedTags', interactedTags);
+
   return (
     <Link href={`/profile/${user.clerkId}`}>
-      <article className="flex w-full flex-col items-center justify-center rounded-2xl border p-8 light-border bg-light-900 dark:bg-dark-200">
+      <article className="flex w-full flex-col items-center justify-center rounded-2xl border p-8 light-border bg-light-900 dark:bg-dark-200 font-inter">
         <Image
           src={user.picture}
           alt="user profile picture"
@@ -29,10 +31,10 @@ const UserCard = async ({ user }: UserCardProps) => {
         />
 
         <div className="mt-4 text-center">
-          <h3 className="h3-bold text-dark200_light900 line-clamp-1">
+          <h3 className="h3-bold text-dark-200 dark:text-light-900 line-clamp-1 font-inter">
             {user.name}
           </h3>
-          <p className="body-regular text-dark500_light500 mt-2">
+          <p className="body-regular text-dark-500 dark:text-light-500 mt-2">
             @{user.username}
           </p>
         </div>
@@ -45,7 +47,7 @@ const UserCard = async ({ user }: UserCardProps) => {
               ))}
             </div>
           ) : (
-            <Badge>No tags yet</Badge>
+            <Badge className="subtle-medium bg-light-800 dark:bg-dark-300 text-light-400 dark:text-light-500 shadow-md rounded-md border-none px-4 py-2 uppercase">No tags yet</Badge>
           )}
         </div>
       </article>

@@ -116,7 +116,7 @@ const Votes = ({
   }, [itemId, userId, router, pathname])
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 font-inter">
       <div className="flex-center gap-2.5">
         <div className="flex-center gap-1.5">
           <Image
@@ -128,8 +128,8 @@ const Votes = ({
             onClick={() => handleVote("upvote")}
           />
 
-          <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
-            <p className="subtle-medium text-dark400_light900">
+          <div className="flex-center bg-light-700 dark:bg-dark-400 min-w-[18px] rounded-sm p-1">
+            <p className="subtle-medium text-dark-400 dark:text-light-900">
               {formatAndDivideNumber(upvotes)}
             </p>
           </div>
@@ -145,8 +145,8 @@ const Votes = ({
             onClick={() => handleVote("downvote")}
           />
 
-          <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
-            <p className="subtle-medium text-dark400_light900">
+          <div className="flex-center bg-light-700 dark:bg-dark-400 min-w-[18px] rounded-sm p-1">
+            <p className="subtle-medium text-dark-400 dark:text-light-900">
               {formatAndDivideNumber(downvotes)}
             </p>
           </div>

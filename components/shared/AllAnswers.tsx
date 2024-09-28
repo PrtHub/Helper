@@ -30,7 +30,7 @@ const AllAnswers = async ({
   });
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 font-inter">
       <div className="flex items-center justify-between">
         <h3 className="primary-text-gradient">
           {totalAnswers} {totalAnswers === 1 ? "Answer" : "Answers"}
@@ -57,7 +57,7 @@ const AllAnswers = async ({
                       className="rounded-full object-cover max-sm:mt-0.5"
                     />
                     <div className="flex flex-col sm:items-start">
-                      <p className="body-semibold text-dark300_light700">
+                      <p className="body-semibold text-dark-300 dark:text-light-700">
                         {answer.author.name}
                       </p>
 

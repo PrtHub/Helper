@@ -125,7 +125,7 @@ const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-10"
+        className="flex w-full flex-col gap-10 font-inter"
       >
         <FormField
           name="title"
@@ -252,9 +252,10 @@ const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
             </FormItem>
           )}
         />
+        <div className="flex w-full justify-end">
         <Button
           type="submit"
-          className="primary-gradient w-fit !text-light-900"
+          className="primary-gradient w-fit !text-light-900 "
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -263,6 +264,7 @@ const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
             <>{type === "Edit" ? "Edit Question" : "Ask a Question"}</>
           )}
         </Button>
+          </div>
       </form>
     </Form>
   );

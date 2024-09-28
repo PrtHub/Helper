@@ -11,8 +11,8 @@ interface StatsProps {
 
 const Stats = ({ totalQuestions, totalAnswers, reputation, badges }: StatsProps) => {
   return (
-    <div className="mt-10">
-      <h4 className="h3-semibold text-dark-200 dark:text-light-900">Stats - {reputation}</h4>
+    <div className="mt-10 font-inter">
+      <h4 className="h3-semibold text-dark-200 dark:text-light-900">Stats</h4>
       <section className="mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-4">
         <div className="light-border bg-light-900 dark:bg-dark-300 flex flex-wrap items-center justify-start gap-4 rounded-md border p-6 shadow-light-300 dark:shadow-dark-200">
           <div>

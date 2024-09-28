@@ -17,7 +17,7 @@ const ProfilEditPage = async () => {
 
   return (
     <>
-      <h1 className="h1-bold text-dark-100 dark:text-light-900">
+      <h1 className="h1-bold text-dark-100 dark:text-light-900 font-inter">
         Edit Profile
       </h1>
 

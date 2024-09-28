@@ -17,14 +17,30 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
 
     const { userId } = params;
 
-    const user = await User.findById(userId);
+    const topTags = await Question.aggregate([
+      { $match: { author: userId } },
+      {$unwind: "$tags"},
+      {
+        $group: {
+          _id: "$tags",
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $limit: 2 },
+      {$lookup: { from: "tags", localField: "_id", foreignField: "_id", as: "tagDetails" }},
+      { $unwind: "$tagDetails" },
+      {
+        $project: {
+          _id: "$tagDetails._id",
+          name: "$tagDetails.name",
+          description: "$tagDetails.description",
+          count: 1
+        }
+      }
+    ])
 
-    if (!user) throw new Error("User not found");
-
-    return [
-      { _id: "1", name: "tag" },
-      { _id: "2", name: "tag2" },
-    ];
+    return topTags
   } catch (error) {
     console.log(error);
     throw error;

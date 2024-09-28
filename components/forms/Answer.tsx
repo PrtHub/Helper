@@ -118,7 +118,7 @@ const Answer = ({ question, authorId, questionId }: AnswerProps) => {
   };
 
   return (
-    <section className="mt-10 flex flex-col gap-y-5">
+    <section className="mt-10 flex flex-col gap-y-5 font-inter">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
         <h4 className="paragraph-semibold text-dark-400 dark:text-light-800">
           Write your answer here

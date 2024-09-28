@@ -35,7 +35,7 @@ const QuestionPage = async ({ params, searchParams }: any) => {
 
   return (
     <>
-      <section className="w-full flex-col flex-start ">
+      <section className="w-full flex-col flex-start font-inter">
         <div className="flex w-full flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
           <Link
             href={`/profile/${result.author.clerkId}`}
@@ -65,8 +65,8 @@ const QuestionPage = async ({ params, searchParams }: any) => {
             />
           </span>
         </div>
-        <h2 className="h2-semibold text-dark-200 dark:text-light-900 mt-3.5 w-full text-left">
-          {result.title}
+        <h2 className="h2-semibold font-[500] text-dark-200 dark:text-light-900 mt-3.5 w-full text-left">
+          {result.title.charAt(0).toUpperCase() + result.title.slice(1)}
         </h2>
       </section>
 

@@ -50,7 +50,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
 
   return (
     <>
-      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center font-inter">
         <h1 className="h1-bold text-dark-100 dark:text-light-900">
           All Questions
         </h1>
