@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const userInfo = await getUserInfo({ userId: params.id });
   
   return {
-    title: `${userInfo.user.name} | Dev Hub`,
+    title: `${userInfo.user.name} | Helper`,
   };
 }
 

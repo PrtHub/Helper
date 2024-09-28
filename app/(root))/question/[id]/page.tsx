@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const result = await getQuestionById({ questionId: params.id });
   
   return {
-    title: `${result.title} | Dev Hub`,
+    title: `${result.title} | Helper`,
   };
 }
 

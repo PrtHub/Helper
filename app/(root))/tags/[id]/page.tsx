@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const result = await getQuestionsByTagId({ tagId: params.id });
   
   return {
-    title: `${result.tagTitle} | Dev Hub`,
+    title: `${result.tagTitle} | Helper`,
   };
 }
 

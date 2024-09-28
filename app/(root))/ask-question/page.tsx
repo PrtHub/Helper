@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: 'Ask Question | DevHub',
+  title: 'Ask Question | Helper',
 }
 
 const AskQuestionPage = async () => {

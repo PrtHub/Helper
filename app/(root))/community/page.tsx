@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Community | DevHub',
+  title: 'Community | Helper',
 }
 
 interface SearchParamsProps {

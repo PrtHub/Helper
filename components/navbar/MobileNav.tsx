@@ -19,7 +19,7 @@ const NavContent = () => {
   const pathname = usePathname();
   
   return (
-    <section className="flex h-full flex-col gap-6 pt-10">
+    <section className="flex h-full flex-col gap-6 pt-10 font-inter">
       {sidebarLinks.map((link, index) => {
         const isActive =
           link.route === pathname ||
@@ -41,7 +41,7 @@ const NavContent = () => {
                 isActive
                   ? "primary-gradient rounded-lg text-light-900"
                   : "text-dark-300 dark:text-light-900"
-              } flex items-center justify-start gap-4 bg-transparent p-4`}
+              } flex items-center justify-start gap-4 bg-transparent p-4 font-inter`}
             >
               <link.imgURL className={`${isActive ? "" : "invert-colors"}`} />
               <p className={`${isActive ? "base-bold" : "base-medium"}`}>
@@ -59,15 +59,15 @@ const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Menu className="invert-colors sm:hidden cursor-pointer" />
+        <Menu className="invert-colors md:hidden cursor-pointer" />
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="bg-light-900 dark:bg-dark-200 border-none sm:hidden"
+        className="bg-light-900 dark:bg-dark-200 border-none md:hidden"
       >
         <Link href={"/"}>
           <h2 className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 ">
-            Dev<span className="text-primary-500">Hub</span>
+            Help<span className="text-primary-500">er</span>
           </h2>
         </Link>
         <section className="flex flex-col gap-5">
@@ -76,7 +76,7 @@ const MobileNav = () => {
           </SheetClose>
 
           <SignedOut>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 font-inter">
               <SheetClose asChild>
                 <Link href="/sign-in">
                   <Button className="small-medium btn-secondary min-h-10 w-full rounded-lg px-4 py-3 shadow-none">

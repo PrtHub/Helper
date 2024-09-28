@@ -8,7 +8,7 @@ import LocalSearchbar from "@/components/search/LocalSearchbar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Tags | Dev Hub',
+  title: 'Tags | Helper',
 }
 
 interface SearchParamsProps {

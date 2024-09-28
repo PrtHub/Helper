@@ -40,7 +40,7 @@ const QuestionCard = ({
   const showActionButtons = clerkId && clerkId === author.clerkId;
 
   return (
-    <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
+    <div className="card-wrapper rounded-[10px] p-5 sm:p-9 sm:px-11 dark:border-none border space-y-5">
       <section className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <span className="subtle-regular text-dark-400 dark:text-light-700 line-clamp-1 flex sm:hidden">

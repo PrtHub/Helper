@@ -15,7 +15,7 @@ import Pagination from "@/components/shared/Pagination";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | Dev Hub",
+  title: "Home | Helper",
 };
 
 interface SearchParamsProps {
@@ -50,12 +50,12 @@ export default async function Home({ searchParams }: SearchParamsProps) {
 
   return (
     <>
-      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center font-inter">
+      <section className="flex w-full justify-between gap-4 flex-col sm:flex-row sm:items-center font-inter">
         <h1 className="h1-bold text-dark-100 dark:text-light-900">
           All Questions
         </h1>
-        <Link href="/ask-question" className="flex justify-end max-sm:w-full">
-          <Button className="primary-gradient min-h-[46px] px-4 py-3 !text-light-900">
+        <Link href="/ask-question" className="flex sm:justify-end w-full sm:w-fit">
+          <Button className="primary-gradient min-h-[46px] w-full px-4 py-3 !text-light-900">
             Ask a Question
           </Button>
         </Link>
